@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './AddProduct.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function AddProduct(){
     const [name , setName] = useState('');
@@ -10,7 +11,7 @@ export default function AddProduct(){
     const [productImage , setProductImage] = useState('');
 
    const addProduct = async () => {
-     if(!name || !brand || !price || !description ) {
+     if(!name || !brand || !price || !description || !productImage ) {
         alert('Please enter all fields')
         return
       }
@@ -19,7 +20,8 @@ export default function AddProduct(){
       name,
       price,
       brand,
-      description
+      description,
+      productImage
       }
      
       const response = await axios.post('/product' , product)
@@ -37,16 +39,27 @@ return(
 <form className='input-form'>
     <input type='text'
     className='input-type'
-    placeholder='Enter name of product'
+    placeholder='Name Of Product'
     value={name}
    onChange={(e)=> {
     setName(e.target.value)
    }}
     />
 
+
 <input type='text'
     className='input-type'
-    placeholder='Enter brand of product'
+    placeholder='Description'
+    value={description}
+   onChange={(e)=> {
+    setDescription(e.target.value)
+   }}
+    />
+
+    
+<input type='text'
+    className='input-type'
+    placeholder='Brand Of Product'
     value={brand}
    onChange={(e)=> {
     setBrand(e.target.value)
@@ -55,19 +68,19 @@ return(
 
 <input type='text'
     className='input-type'
-    placeholder='Enter description'
-    value={description}
+    placeholder='Price'
+    value={price}
    onChange={(e)=> {
-    setDescription(e.target.value)
+    setPrice(e.target.value)
    }}
     />
 
 <input type='text'
     className='input-type'
-    placeholder='Enter price'
-    value={price}
+    placeholder='URL Of Product Image'
+    value={productImage}
    onChange={(e)=> {
-    setPrice(e.target.value)
+    setProductImage(e.target.value)
    }}
     />
 
@@ -76,7 +89,7 @@ className='add-btn input-type'
 onClick={addProduct}>
 Add Product
 </button>
-
+<Link to={'/'} className='go-back-link'> Go Back </Link>
 
 </form>
 )

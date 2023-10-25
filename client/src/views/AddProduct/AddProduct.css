@@ -7,10 +7,10 @@
 }
 
 .input-type{
-  margin: 10px auto;
+  margin: 12px auto;
   font-size: 18px;
   padding: 10px;
-width: 60%;
+width: 50%;
 border: none;
 border-bottom:1px solid gray;
 }
@@ -18,13 +18,21 @@ border-bottom:1px solid gray;
 .add-btn {
     color: white;
     background-color: rgb(28, 179, 28);
-    width: 35%;
-    border: 1px solid  rgb(28, 179, 28);
+    width: 25%;
+    border: 2px solid  rgb(28, 179, 28);
     border-radius: 5px;
-    margin-top: 20px;
-    
+    margin-top: 25px;
+    font-weight: bold;
+   
+
 }
 .add-btn:hover {
     background-color: transparent;
     color: rgb(28, 179, 28) ;
+    
+}
+.go-back-link{
+    margin-left:48% ;
+    margin-top: 10px;
+    font-size: 18px;
 }

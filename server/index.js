@@ -28,7 +28,7 @@ app.get('/health', (req, res) => {
     res.json({ status: "All Good!" })
 });
 
-// get product data (storage~)
+// get all product data (storage)
 app.get('/products', async (req, res) => {
     const products = await Product.find();
     res.json(
@@ -77,6 +77,8 @@ app.post('/product', async (req, res) => {
             })
     }
 
+   
+
     const newProduct = new Product({
         name: name,
         description: description,
@@ -96,10 +98,10 @@ app.post('/product', async (req, res) => {
 
 
 // find product data
-app.get('/product', async (req, res) => {
-    const { name } = req.query;
+app.get('/product/:_id', async (req, res) => {
+    const {_id } = req.params;
 
-    const product = await Product.findOne({ name: name })
+    const product = await Product.findOne({ _id : _id})
 
     if (product == null) {
         return res.json({
@@ -124,7 +126,7 @@ app.delete('/product/:_id', async (req, res) => {
     res.json({
         success: true,
         data: {},
-        msg: `Sucessfully deleted data with ${_id}`
+        message: `Sucessfully deleted product`
     })
 });
 
@@ -186,7 +188,7 @@ app.put('/product/:_id', async(req, res)=> {
 res.json({
     success: true,
     data : updatedProduct,
-    msg: "Successfully updated"
+    message: "Successfully updated"
 }) 
 
 });
@@ -194,11 +196,10 @@ res.json({
 // patch (we can update individiual data)
 app.patch('/product/:_id', async(req, res) => {
     const { _id } = req.params;
-    const {name, brand, description, price, 
-         productImage} = req.body;
+    const {name, brand, description, price,  productImage} = req.body;
 
-       const product = await Product.findById(_id);
-   
+    const product = await Product.findOne({_id:_id})
+    
        if(name)
       {
         product.name = name;
